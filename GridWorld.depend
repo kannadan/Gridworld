@@ -4,3 +4,19 @@
 
 1472826558 c:\users\joonas\documents\ohjelmat\c-kieli\gridworld\game\game.h
 
+1473149587 source:c:\users\joonas\documents\c-kieli\gridworld\game\game.cpp
+	"game.h"
+
+1473149587 c:\users\joonas\documents\c-kieli\gridworld\game\game.h
+
+1473164643 source:c:\users\joonas\documents\c-kieli\gridworld\game\gamestate.cpp
+	"GameState.h"
+	<iostream>
+
+1473164567 c:\users\joonas\documents\c-kieli\gridworld\game\gamestate.h
+	<iostream>
+
+1473164263 source:c:\users\joonas\documents\c-kieli\gridworld\main.cpp
+	<iostream>
+	"game/GameState.h"
+

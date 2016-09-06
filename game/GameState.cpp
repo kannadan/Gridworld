@@ -1,29 +1,93 @@
 #include "GameState.h"
+#include <iostream>
+using namespace std;
 
 GameState::GameState(int variable)
 {
+    for (int y = 0; y < 4; y++){
+        for (int x = 0; x < 4; x++){
+            for (int z = 0; z< 4; z++){
+                board[y][x][z] = 0;
+            }
+        }
+    }
     switch(variable){
 
     case 1:                 //all pieces at predetermined positions
-    board = {{{0,0,0,0},{1,0,0,0},{0,0,0,0},{0,0,0,0}},
-            {{0,0,0,0},{0,0,1,0},{0,0,0,0},{0,0,0,0}},      // (player, wall, hole, gold)
-            {{0,0,0,0},{0,0,0,0},{0,1,0,0},{0,0,0,0}},      // make it work
-            {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,1}}};
-    position = {0, 1};
+
+    board[0][1][0] = 1;     //player
+    board[2][2][1] = 1;     //wall
+    board[1][1][2] = 1;     //hole
+    board[3][3][3] = 1;     //gold
+
+    position[0] = 0;
+    position[1] = 1;
     break;
     case 2:                 //player start position varies
 
     break;
     case 3:                 //all pieces at random start position
-
+    break;
     }
 }
 
-GameState::getBoard(){
-    return board;
+GameState::GameState(int old[4][4][4], int oldPosition[2],int direction){       //creates a new gamestate based on move made
+    for (int y = 0; y < 4; y++){
+        for (int x = 0; x < 4; x++){
+            for (int z = 0; z< 4; z++){
+                board[y][x][z] = old[y][x][z];      //copy old state
+            }
+        }
+    }
+    position[0] = oldPosition[0];
+    position[1] = oldPosition[1];
+    switch(direction){
+    case 1:
+        if (position[0] != 0 && board[position[0]-1][position[1]][1] != 1){
+            board[position[0]][position[1]][0] = 0;
+            position[0]--;
+            board[position[0]][position[1]][0] = 1;
+        }
+        break;
+    case 2:
+        if (position[0] != 3 && board[position[0]+1][position[1]][1] != 1){
+            board[position[0]][position[1]][0] = 0;
+            position[0]++;
+            board[position[0]][position[1]][0] = 1;
+        }
+        break;
+    case 3:
+        if (position[1] != 0 && board[position[0]][position[1]-1][1] != 1){
+            board[position[0]][position[1]][0] = 0;
+            position[1]--;
+            board[position[0]][position[1]][0] = 1;
+        }
+        break;
+    case 4:
+        if (position[1] != 3 && board[position[0]][position[1]+1][1] != 1){
+            board[position[0]][position[1]][0] = 0;
+            position[1]++;
+            board[position[0]][position[1]][0] = 1;
+        }
+
+    }
+
 }
 
-GameState::getWindow(){             //goes through the board and generates 2d matrix for display purposes
+void GameState::printBoard(){
+    for (int y = 0; y < 4; y++){
+        for (int x = 0; x < 4; x++){
+            for (int z = 0; z< 4; z++){
+                cout << board[y][x][z];
+            }
+            cout << "  ";
+        }
+        cout << endl;
+    }
+
+}
+
+void GameState::updateWindow(){             //goes through the board and generates 2d matrix for display purposes
     for(int y = 0; y<4; y++){
         for(int x = 0; x < 4; x++){
             for(int z = 0; z < 4; z++){
@@ -41,6 +105,7 @@ GameState::getWindow(){             //goes through the board and generates 2d ma
                     case 3:
                         window[y][x] = '+';
                     }
+                    break;
 
                 }
                 else{
@@ -49,44 +114,23 @@ GameState::getWindow(){             //goes through the board and generates 2d ma
             }
         }
     }
-    return window;
 }
 
-GameState::makeMove(int move){
+GameState GameState::makeMove(int command){
 
-    switch(move){
-    case 1:
-        if (position[0] != 0 && board[position[0]-1][position[1]][1] != 1){
-            board[position[0]][position[1]][0] = 0;
-            position[0]--;
-            board[position[0]][position[1]][0] = 1;
-        }
-        break;
-    case 2:
-        if (position[0] != 3 && board[position[0]+1][position[1]][1] != 1){
-            board[position[0]][position[1]][0] = 0;
-            position[0]++;
-            board[position[0]][position[1]][0] = 1;
-        }
-        break;
-    case 3:
-        if (position[1] != 0 && board[position[0]-1][position[1]][1] != 1){
-            board[position[0]][position[1]][0] = 0;
-            position[1]--;
-            board[position[0]][position[1]][0] = 1;
-        }
-        break;
-    case 4:
-        if (position[1] != 3 && board[position[0]+1][position[1]][1] != 1){
-            board[position[0]][position[1]][0] = 0;
-            position[1]++;
-            board[position[0]][position[1]][0] = 1;
+    GameState newState(board, position, command);
+    return newState;
 
-
+}
+void GameState::printWindow(){
+    updateWindow();
+    for (int y = 0; y < 4; y++){
+        for (int x = 0; x < 4; x++){
+            cout << "[" + window[y][x] + "]";
+            cout << "  ";
+        }
+        cout << endl;
     }
-
-
-
 
 
 }
