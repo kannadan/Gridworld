@@ -1,2 +1,5 @@
 bin/*
 obj/*
+GridWorld.layout
+GridWorld.depend
+gmon.out
