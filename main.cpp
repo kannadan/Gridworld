@@ -1,11 +1,15 @@
+#include <windows.h>
 #include <iostream>
+#include "SDL.h"
+#include "glew.h"
 #include "game/GameState.h"
 
 using namespace std;
 
-int main()
+int main(int argc, char** argv)
 {
-    GameState state(1);
+    int SDL_init(SDL_INIT_EVERYTHING);
+    /*GameState state(1);
     int a = 0;
     int dir;
     state.printWindow();
@@ -17,7 +21,7 @@ int main()
             break;
         }
         state.printWindow();
-    }
+    }*/
 
     return 0;
 }
