@@ -8,8 +8,10 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    int SDL_init(SDL_INIT_EVERYTHING);
-    cout << "hello world!";
+    game peli(1);
+    cout << "enter anything";
+    int a;
+    cin >> a;
 
     return 0;
 }

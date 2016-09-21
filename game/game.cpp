@@ -4,6 +4,10 @@ using namespace std;
 
 game::game(int variable)
 {
+    _window = nullptr;
+    _screenWidth = 1024;
+    _screenHeight  = 600;
+
     switch(variable){
 
     case 0:         // no graphics
@@ -25,6 +29,10 @@ game::game(int variable)
     break;
     }
     case 1:         // graphics
+    SDL_Init(SDL_INIT_EVERYTHING);
+    _window = SDL_CreateWindow("GridWorld", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_OPENGL);
+
+
     break;
     }
 }
