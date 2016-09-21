@@ -5,7 +5,7 @@
 class game
 {
     public:
-        game();
+        game(int);
 
     protected:
 
