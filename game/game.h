@@ -5,6 +5,8 @@
 #include "glew.h"
 #include "SDL.h"
 
+enum class tila{KAYNNISSA, KIINNI};
+enum class suunta{UP, DOWN, LEFT, RIGHT, NONE};
 
 class game
 {
@@ -17,6 +19,10 @@ class game
         SDL_Window* _window;
         int _screenWidth;
         int _screenHeight;
+        void initSystem();
+        void processInput();
+        tila _omatila;
+        suunta _omasuunta;
 };
 
 #endif // GAME_H
