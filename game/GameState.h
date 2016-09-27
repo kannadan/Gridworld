@@ -16,6 +16,7 @@ class GameState
         bool gameOver();
         void printBoard();
         void printWindow();
+        int endGame();
 
     protected:
 

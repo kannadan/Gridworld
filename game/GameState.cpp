@@ -87,6 +87,19 @@ void GameState::printBoard(){
 
 }
 
+int GameState::endGame(){
+    if (position[0] == 3 && position[1] == 3){
+        return 1;
+    }
+    else if (position[0] == 1 && position[1] == 1){
+        return 2;
+    }
+    else{
+        return 0;
+    }
+
+}
+
 void GameState::updateWindow(){             //goes through the board and generates 2d matrix for display purposes
     for(int y = 0; y<4; y++){
         for(int x = 0; x < 4; x++){
