@@ -1,5 +1,6 @@
 #ifndef SPRITE_H
 #define SPRITE_H
+#define GLEW_STATIC
 #include <iostream>
 #include <windows.h>
 #include "glew.h"
@@ -16,6 +17,7 @@ class Sprite
 
         void init(float x, float y, float width, float height);
         void draw();
+        void printID();
 
     protected:
 

@@ -21,6 +21,7 @@ void Sprite::init(float x, float y, float width, float height){
     if (_vboID == 0){                   //if vertex buffer not initialized, initialize it
         glGenBuffers(1, &_vboID);
     }
+    cout << "toimii";
     float vertexData[12] = {_x+_width, _y+_width,       // first triangle vertexes
                             _x, _y+_height,
                             _x, _y,
@@ -47,4 +48,9 @@ void Sprite::draw(){
 
     glDisableVertexAttribArray(0);              //cleaning up
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void Sprite::printID(){
+    cout << _vboID;
+
 }
