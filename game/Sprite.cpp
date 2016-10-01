@@ -1,5 +1,4 @@
 #include "Sprite.h"
-#define -DGLEW_STATIC
 
 Sprite::Sprite()
 {
