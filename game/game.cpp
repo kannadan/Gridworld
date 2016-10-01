@@ -1,6 +1,5 @@
 #include "game.h"
 #include "GameState.h"
-#include <iostream>
 #include <windows.h>
 
 
@@ -34,6 +33,8 @@ game::game(int variable)
         }
         case 1:         // graphics
         initSystem();
+        _sprite.init(-1.0f, -1.0f, 1.0f, 1.0f);
+        _sprite.draw();
         GameState state(1);
         int a = 0;
         int dir;

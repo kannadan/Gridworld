@@ -4,6 +4,7 @@
 #include <iostream>
 #include "glew.h"
 #include "SDL.h"
+#include "Sprite.h"
 
 enum class tila{KAYNNISSA, KIINNI};
 enum class suunta{UP, DOWN, LEFT, RIGHT, NONE};
@@ -23,6 +24,7 @@ class game
         void processInput();
         tila _omatila;
         suunta _omasuunta;
+        Sprite _sprite;
 };
 
 #endif // GAME_H
