@@ -22,6 +22,7 @@
 					<Add library="mingw32" />
 					<Add library="libSDL2main" />
 					<Add library="libSDL2" />
+					<Add library="glew32s" />
 					<Add library="Opengl32" />
 					<Add library="glew32" />
 					<Add directory="../deps/lib" />
@@ -47,6 +48,8 @@
 		</Compiler>
 		<Unit filename="game/GameState.cpp" />
 		<Unit filename="game/GameState.h" />
+		<Unit filename="game/Sprite.cpp" />
+		<Unit filename="game/Sprite.h" />
 		<Unit filename="game/game.cpp" />
 		<Unit filename="game/game.h" />
 		<Unit filename="main.cpp" />

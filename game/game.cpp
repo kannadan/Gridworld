@@ -7,11 +7,9 @@
 using namespace std;
 
 
-game::game()
+game::game(): _omatila(tila::KAYNNISSA), _omasuunta(suunta::NONE), _dir(0)
 {
-    _omatila = tila::KAYNNISSA;
-    _omasuunta = suunta::NONE;
-    _dir = 0;
+
 }
 
 void game::run(){
@@ -40,7 +38,7 @@ void game::run(){
 
 void game::runG(){
     initSystem();
-    _sprite.init(-1.0f, -1.0f, 1.0f, 2.0f);
+    _sprite.init(-1.0f, -1.0f, 1.0f, 1.0f);
     drawGame();
     GameState state(1);
     state.printWindow();
