@@ -7,68 +7,73 @@
 using namespace std;
 
 
-game::game(int variable)
+game::game()
 {
     _omatila = tila::KAYNNISSA;
     _omasuunta = suunta::NONE;
-    switch(variable){
+    _dir = 0;
+}
 
-        case 0:         // no graphics
-        {
-
-        GameState state(1);
-        int a = 0;
-        int dir;
+void game::run(){
+    GameState state(1);
+    state.printWindow();
+    while (_omatila == tila::KAYNNISSA){
+        cout << "make a move \n";
+        cin >> _dir;
+        state = state.makeMove(_dir);
+        if (_dir == 5){
+            break;
+        }
         state.printWindow();
-        while (a < 1){
-            cout << "make a move \n";
-            cin >> dir;
-            state = state.makeMove(dir);
-            if (dir == 5){
-                break;
+        cout << "\n";
+        if (state.endGame() != 0){
+            _omatila = tila::KIINNI;
+            if (state.endGame() == 1){
+                cout << "Voitit pelin";
             }
+            else{
+                cout << "Hävisit pelin";
+            }
+        }
+    }
+}
+
+void game::runG(){
+    initSystem();
+    _sprite.init(-1.0f, -1.0f, 1.0f, 2.0f);
+    drawGame();
+    GameState state(1);
+    state.printWindow();
+    cout << endl;
+    while (_omatila == tila::KAYNNISSA){
+        processInput();
+        if (_omasuunta != suunta::NONE){
+            switch (_omasuunta){
+                case suunta::UP:
+                    _dir = 1;
+                    break;
+                case suunta::DOWN:
+                    _dir = 2;
+                    break;
+                case suunta::LEFT:
+                    _dir = 3;
+                    break;
+                case suunta::RIGHT:
+                    _dir = 4;
+                    break;
+            }
+            state = state.makeMove(_dir);
             state.printWindow();
+            cout << "\n";
+            _omasuunta = suunta::NONE;
         }
-        break;
-        }
-        case 1:         // graphics
-        initSystem();
-        _sprite.init(-1.0f, -1.0f, 1.0f, 1.0f);
-        _sprite.draw();
-        GameState state(1);
-        int a = 0;
-        int dir;
-        state.printWindow();
-        while (_omatila == tila::KAYNNISSA){
-            processInput();
-            if (_omasuunta != suunta::NONE){
-                switch (_omasuunta){
-                    case suunta::UP:
-                        dir = 1;
-                        break;
-                    case suunta::DOWN:
-                        dir = 2;
-                        break;
-                    case suunta::LEFT:
-                        dir = 3;
-                        break;
-                    case suunta::RIGHT:
-                        dir = 4;
-                        break;
-                }
-                state = state.makeMove(dir);
-                state.printWindow();
-                cout << "\n";
-                _omasuunta = suunta::NONE;
+        if (state.endGame() != 0){
+            _omatila = tila::KIINNI;
+            if (state.endGame() == 1){
+                cout << "Voitit pelin";
             }
-            if (state.endGame() != 0){
-                _omatila = tila::KIINNI;
-                if (state.endGame() == 1){
-                    cout << "Voitit pelin";
-                }
-                else{
-                    cout << "Hävisit pelin";
-                }
+            else{
+                cout << "Hävisit pelin";
             }
         }
     }
@@ -81,6 +86,20 @@ void game::initSystem(){        // mainly initializes graphics stuff
     _screenHeight  = 600;
     SDL_Init(SDL_INIT_EVERYTHING);
     _window = SDL_CreateWindow("GridWorld", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_OPENGL);
+    if (_window == nullptr){
+        fatalError("SDL window could not be created");
+    }
+    SDL_GLContext glcontext = SDL_GL_CreateContext(_window);
+    if (glcontext == nullptr){
+        fatalError("SDL_GL context could not be crated");
+    }
+    GLenum error = glewInit();
+    if (error != GLEW_OK){
+        fatalError("glew not ok");
+    }
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+    glClearColor(0.0f,1.0f,0.0f,1.0);
 
 
 }
@@ -120,7 +139,23 @@ void game::processInput(){
 
     }
 }
+void game::fatalError(string errorString){
+    cout << errorString << endl;
+    cout << "enter any key to quit: ";
+    int temp;
+    cin >> temp;
+    _omatila = tila::KIINNI;
+}
 
+void game::drawGame(){
+    glClearDepth(1.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    _sprite.draw();
+
+    SDL_GL_SwapWindow(_window);
+
+}
 
 
 

@@ -8,7 +8,8 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    game peli(1);
+    game peli;
+    peli.runG();
 
 
     return 0;

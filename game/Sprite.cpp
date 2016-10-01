@@ -21,14 +21,13 @@ void Sprite::init(float x, float y, float width, float height){
     if (_vboID == 0){                   //if vertex buffer not initialized, initialize it
         glGenBuffers(1, &_vboID);
     }
-    cout << "toimii";
-    float vertexData[12] = {_x+_width, _y+_width,       // first triangle vertexes
+    float vertexData[12] = {_x+_width, _y+_height,       // first triangle vertexes
                             _x, _y+_height,
                             _x, _y,
 
                             _x, _y,                     //second triangle vertexes
                             _x+_width, _y,
-                            _x+_width, _y+_width};
+                            _x+_width, _y+_height};
 
     glBindBuffer(GL_ARRAY_BUFFER, _vboID);                  //put the vertex data in to the buffer
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
