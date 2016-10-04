@@ -46,6 +46,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="game/GLSLProgram.cpp" />
+		<Unit filename="game/GLSLProgram.h" />
 		<Unit filename="game/GameState.cpp" />
 		<Unit filename="game/GameState.h" />
 		<Unit filename="game/Sprite.cpp" />
